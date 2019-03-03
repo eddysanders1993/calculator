@@ -21,9 +21,9 @@ btnTwo.onclick = () => display(2);
 const btnThree = document.querySelector("#three");
 btnThree.onclick = () => display(3);
 const btnZero = document.querySelector("#zero");
-btnZero.onclick = () => display(0);
+btnZero.onclick = () => display('0');
 const btnClear = document.querySelector("#clear");
-btnClear.onclick = () => display('');
+btnClear.onclick = () => clearDisplay();
 const btnPlus = document.querySelector("#add");
 btnPlus.onclick = () => display('+');
 const btnMinus = document.querySelector("#subtract");
@@ -32,18 +32,18 @@ const btnMultiply = document.querySelector("#multiply");
 btnMultiply.onclick = () => display('*');
 const btnDivide = document.querySelector("#divide");
 btnDivide.onclick = () => display('/');
+const btnEqual = document.querySelector("#equals");
+btnEqual.onclick = () => operate(parseInt(displayValueArr[0]),parseInt(displayValueArr[2]),displayValueArr[1]);
 
-
-
+function clearDisplay() {
+	displayValueArr = [];
+	container.textContent = '';
+}
 
 function display(x) {
-	if (x=='') {
-		displayValueArr = [];
-	}
 	displayValueArr.push(x);
 	let displayValueStr = displayValueArr.join(' ');
 	container.textContent = displayValueStr;
-
 }
 
 function multiply (x,y) {
@@ -52,6 +52,7 @@ return x * y;
 
 function add (x,y) {
 	return x+y;
+
 }
 
 function subtract (x,y) {
@@ -63,16 +64,17 @@ return x / y;
 }
 
 function operate (x,y,z) {
+
 if(z=='+') {
-	return add(x,y);
+	return container.textContent = add(x,y);
 }
 else if(z=='-') {
-	return subtract(x,y);
+	return container.textContent = subtract(x,y);
 }
 else if(z=='*') {
-	return multiply(x,y);
+	return container.textContent = multiply(x,y);
 }
 else if(z=='/') {
-	return divide(x,y);
+	return container.textContent = divide(x,y);
 }
 }
