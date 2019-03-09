@@ -1,11 +1,16 @@
 let displayValueArr = [];
+let displayValueStr = '';
+let firstNumber = '';
+let secondNumber = '';
+let firstOperator = '';
+let firstOperatorIndex = [];
 
 const container = document.querySelector('#screen');
 container.style.color = 'blue';
 const btnSeven = document.querySelector("#seven");
-btnSeven.onclick = () => display(7);
+btnSeven.onclick = () => display('7');
 const btnEight = document.querySelector("#eight");
-btnEight.onclick = () => display(8);
+btnEight.onclick = () => display('8');
 const btnNine = document.querySelector("#nine");
 btnNine.onclick = () => display(9);
 const btnFour = document.querySelector("#four");
@@ -33,16 +38,36 @@ btnMultiply.onclick = () => display('*');
 const btnDivide = document.querySelector("#divide");
 btnDivide.onclick = () => display('/');
 const btnEqual = document.querySelector("#equals");
-btnEqual.onclick = () => operate(parseInt(displayValueArr[0]),parseInt(displayValueArr[2]),displayValueArr[1]);
+btnEqual.onclick = () => operate(firstNumber,secondNumber,firstOperator);
+
+
+function saveFirstNumber(x) {
+
+}
+
+
 
 function clearDisplay() {
 	displayValueArr = [];
 	container.textContent = '';
 }
+/*press operator
+all numbers before operator become firstNumber*/
 
 function display(x) {
 	displayValueArr.push(x);
-	let displayValueStr = displayValueArr.join(' ');
+	let displayValueStr = displayValueArr.join('');
+
+	if(x=='+'||x=='-'||x=='/'||x=='*') {
+	firstOperatorIndex = displayValueArr.indexOf(x);
+
+
+		firstNumber = displayValueArr.join('');
+
+	firstOperator = x;
+	}
+
+
 	container.textContent = displayValueStr;
 }
 
