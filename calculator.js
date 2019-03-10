@@ -1,6 +1,7 @@
 let displayValueArr = [];
 let displayValueStr = '';
 let firstNumber = '';
+let firstNumberArray = [];
 let secondNumber = '';
 let firstOperator = '';
 let firstOperatorIndex = [];
@@ -30,7 +31,7 @@ btnZero.onclick = () => display('0');
 const btnClear = document.querySelector("#clear");
 btnClear.onclick = () => clearDisplay();
 const btnPlus = document.querySelector("#add");
-btnPlus.onclick = () => display('+');
+btnPlus.onclick = () => saveOperations('+');
 const btnMinus = document.querySelector("#subtract");
 btnMinus.onclick = () => display('-');
 const btnMultiply = document.querySelector("#multiply");
@@ -41,8 +42,12 @@ const btnEqual = document.querySelector("#equals");
 btnEqual.onclick = () => operate(firstNumber,secondNumber,firstOperator);
 
 
-function saveFirstNumber(x) {
-
+function saveOperations(x) {
+displayValueArr.push(x);
+displayValueStr = displayValueArr.join('');
+firstNumber= firstNumberArray.join('');
+firstOperator = x;
+container.textContent = displayValueStr;
 }
 
 
@@ -52,22 +57,18 @@ function clearDisplay() {
 	container.textContent = '';
 }
 /*press operator
-all numbers before operator become firstNumber*/
+all numbers before operator become firstNumber
+create firstNumberArray
+join Array into firstNumberString when first operator pressed
+*/
+
+
+
 
 function display(x) {
 	displayValueArr.push(x);
-	let displayValueStr = displayValueArr.join('');
-
-	if(x=='+'||x=='-'||x=='/'||x=='*') {
-	firstOperatorIndex = displayValueArr.indexOf(x);
-
-
-		firstNumber = displayValueArr.join('');
-
-	firstOperator = x;
-	}
-
-
+	firstNumberArray.push(x);
+	displayValueStr = displayValueArr.join('');
 	container.textContent = displayValueStr;
 }
 
