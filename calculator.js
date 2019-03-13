@@ -71,14 +71,12 @@ function clearDisplay() {
 function saveAndOperate() {
 	finalNumberStr = numArr.join('');
 	valueArr.push(finalNumberStr);
-	finalOperate();
+
+	operate();
 }
 
 function saveValues(x) {
-	if(valueArr.includes('*'||'/'||'+'||'-')) {
-		operate();
-	}
-	else {
+
 		numberStr = numArr.join('');
 		numArr = [];
 		valueArr.push(numberStr);
@@ -86,7 +84,7 @@ function saveValues(x) {
 		displayValueArr.push(x);
 		displayValueStr = displayValueArr.join('');
 		container.textContent = displayValueStr;
-	}
+	
 }
 
 
@@ -131,8 +129,9 @@ function operate() {
 		let addition = valueArr.indexOf('+')
 		valueArr.splice(addition-1,3,add(parseInt(valueArr[addition-1]),parseInt(valueArr[addition+1])));
 	}
-
-	return valueArr.push(valueArr);
+	numArr = [];
+	displayValueStr = valueArr.join('');
+	return container.textContent = displayValueStr;
 }
 
 function finalOperate() {
