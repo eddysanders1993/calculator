@@ -3,17 +3,14 @@ let displayValueStr = '';
 let numberStr = '';
 let valueArr = [];
 let numArr = [];
-let secondNumber = '';
-let secondNumberArr = [];
-let firstOperator = '';
-let firstOperatorIndex = [];
+
 
 const container = document.querySelector('#screen');
 container.style.color = 'blue';
 const btnSeven = document.querySelector("#seven");
-btnSeven.onclick = () => display('7');
+btnSeven.onclick = () => display(7);
 const btnEight = document.querySelector("#eight");
-btnEight.onclick = () => display('8');
+btnEight.onclick = () => display(8);
 const btnNine = document.querySelector("#nine");
 btnNine.onclick = () => display(9);
 const btnFour = document.querySelector("#four");
@@ -29,7 +26,7 @@ btnTwo.onclick = () => display(2);
 const btnThree = document.querySelector("#three");
 btnThree.onclick = () => display(3);
 const btnZero = document.querySelector("#zero");
-btnZero.onclick = () => display('0');
+btnZero.onclick = () => display(0);
 const btnClear = document.querySelector("#clear");
 btnClear.onclick = () => clearDisplay();
 const btnPlus = document.querySelector("#add");
@@ -37,9 +34,9 @@ btnPlus.onclick = () => saveValues('+');
 const btnMinus = document.querySelector("#subtract");
 btnMinus.onclick = () => saveValues('-');
 const btnMultiply = document.querySelector("#multiply");
-btnMultiply.onclick = () => display('*');
+btnMultiply.onclick = () => saveValues('*');
 const btnDivide = document.querySelector("#divide");
-btnDivide.onclick = () => display('/');
+btnDivide.onclick = () => saveValues('/');
 const btnEqual = document.querySelector("#equals");
 btnEqual.onclick = () => saveAndOperate();
 
@@ -63,40 +60,34 @@ btnEqual.onclick = () => saveAndOperate();
 function clearDisplay() {
 	displayValueArr = [];
 	displayValueStr = '';
-	firstNumber = '';
-	firstNumberArray = [];
-	secondNumber = '';
-	secondNumberArr = [];
-	firstOperator = '';
-	firstOperatorIndex = [];
-
+	 numberStr = '';
+	 valueArr = [];
+	 numArr = [];
 	container.textContent = '';
 }
-/*press operator
-all numbers before operator become firstNumber
-create firstNumberArray
-join Array into firstNumberString when first operator pressed
-*/
+
+
 
 function saveAndOperate() {
-
-
-finalNumberStr = numArr.join('');
-valueArr.push(finalNumberStr);
-operate(valueArr);
+	finalNumberStr = numArr.join('');
+	valueArr.push(finalNumberStr);
+	finalOperate();
 }
-
 
 function saveValues(x) {
-	displayValueArr.push(x);
-	displayValueStr = displayValueArr.join('');
-	container.textContent = displayValueStr;
-	numberStr = numArr.join('');
-	numArr = [];
-	valueArr.push(numberStr);
-	valueArr.push(x);
+	if(valueArr.includes('*'||'/'||'+'||'-')) {
+		operate();
+	}
+	else {
+		numberStr = numArr.join('');
+		numArr = [];
+		valueArr.push(numberStr);
+		valueArr.push(x);
+		displayValueArr.push(x);
+		displayValueStr = displayValueArr.join('');
+		container.textContent = displayValueStr;
+	}
 }
-
 
 
 function display(x) {
@@ -104,37 +95,75 @@ function display(x) {
 	displayValueArr.push(x);
 	displayValueStr = displayValueArr.join('');
 	container.textContent = displayValueStr;
-	}
-
+}
 
 function multiply (x,y) {
-return x * y;
+	return x * y;
 }
 
 function add (x,y) {
-	return x+y;
-
+	return x + y;
 }
 
 function subtract (x,y) {
-return x-y;
+	return x - y;
 }
 
 function divide (x,y) {
-return x / y;
+	return x / y;
 }
 
-function operate (x) {
 
-
-		while(valueArr.includes('+')) {
-		let plus = valueArr.indexOf('+')
-		return add(parseInt(valueArr[plus-1]),parseInt(valueArr[plus+1]));
+function operate() {
+	if(valueArr.includes('*')) {
+		let multiplication = valueArr.indexOf('*')
+		valueArr.splice(multiplication-1,3,multiply(parseInt(valueArr[multiplication-1]),parseInt(valueArr[multiplication+1])));
+	}
+	else if(valueArr.includes('/')) {
+		let division = valueArr.indexOf('/')
+		valueArr.splice(division-1,3,divide(parseInt(valueArr[division-1]),parseInt(valueArr[division+1])));
+	}
+	else if(valueArr.includes('-')) {
+		let subtraction = valueArr.indexOf('-')
+		valueArr.splice(subtraction-1,3,subtract(parseInt(valueArr[subtraction-1]),parseInt(valueArr[subtraction+1])));
+	}
+	else if(valueArr.includes('+')) {
+		let addition = valueArr.indexOf('+')
+		valueArr.splice(addition-1,3,add(parseInt(valueArr[addition-1]),parseInt(valueArr[addition+1])));
 	}
 
+	return valueArr.push(valueArr);
 }
-//only performs operations on first two numbers
-// need to replace elements in array with solution
+
+function finalOperate() {
+
+	while(valueArr.includes('+')) {
+		let addition = valueArr.indexOf('+')
+		valueArr.splice(addition-1,3,add(parseInt(valueArr[addition-1]),parseInt(valueArr[addition+1])));
+	}
+	while(valueArr.includes('*')) {
+		let multiplication = valueArr.indexOf('*')
+		valueArr.splice(multiplication-1,3,multiply(parseInt(valueArr[multiplication-1]),parseInt(valueArr[multiplication+1])));
+	}
+	while(valueArr.includes('/')) {
+		let division = valueArr.indexOf('/')
+		valueArr.splice(division-1,3,divide(parseInt(valueArr[division-1]),parseInt(valueArr[division+1])));
+	}
+	while(valueArr.includes('-')) {
+		let subtraction = valueArr.indexOf('-')
+		valueArr.splice(subtraction-1,3,subtract(parseInt(valueArr[subtraction-1]),parseInt(valueArr[subtraction+1])));
+	}
+	displayValueStr = valueArr.join('');
+	return container.textContent = displayValueStr;
+
+}
+
+
+
+
+
+
+
 
 
 /*if(z=='+') {
