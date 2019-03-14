@@ -76,7 +76,6 @@ function saveAndOperate() {
 
 function saveValues(x) {
 		/*numberStr = numArr.join('');
-		if(valueArr.includes('*')||valueArr.includes('/')||valueArr.includes('+')||valueArr.includes('-')) {
 		valueArr.push(numberStr);
 		*/
 
@@ -89,7 +88,11 @@ function saveValues(x) {
 	else {
 		container.textContent = displayValueStr;*/
 
-
+		if(valueArr.includes('*')||valueArr.includes('/')||valueArr.includes('+')||valueArr.includes('-')) {
+			valueArr.push(numberStr);
+			operate();
+		}
+		else {
 		valueArr.push(numberStr);
 		valueArr.push(x);
 		numArr = [];
@@ -97,7 +100,7 @@ function saveValues(x) {
 		displayValueArr.push(x);
 		displayValueStr = displayValueArr.join('');
 		container.textContent = displayValueStr;
-
+	}
 }
 
 
@@ -145,6 +148,8 @@ function operate() {
 		let addition = valueArr.indexOf('+')
 		valueArr.splice(addition-1,3,add(parseInt(valueArr[addition-1]),parseInt(valueArr[addition+1])));
 	}
+	displayValueStr = valueArr.join('');
+	return container.textContent = displayValueStr;
 
 }
 /*
@@ -166,8 +171,6 @@ function finalOperate() {
 		let subtraction = valueArr.indexOf('-')
 		valueArr.splice(subtraction-1,3,subtract(parseInt(valueArr[subtraction-1]),parseInt(valueArr[subtraction+1])));
 	}
-	displayValueStr = valueArr.join('');
-	return container.textContent = displayValueStr;
 
 }
 */
