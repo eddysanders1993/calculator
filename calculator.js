@@ -91,6 +91,12 @@ function saveValues(x) {
 		if(valueArr.includes('*')||valueArr.includes('/')||valueArr.includes('+')||valueArr.includes('-')) {
 			valueArr.push(numberStr);
 			operate();
+			valueArr.push(x);
+			numArr = [];
+			numberStr = '';
+			displayValueArr.push(x);
+			displayValueStr = displayValueArr.join('');
+			container.textContent = displayValueStr;
 		}
 		else {
 		valueArr.push(numberStr);
@@ -148,8 +154,7 @@ function operate() {
 		let addition = valueArr.indexOf('+')
 		valueArr.splice(addition-1,3,add(parseInt(valueArr[addition-1]),parseInt(valueArr[addition+1])));
 	}
-	displayValueStr = valueArr.join('');
-	return container.textContent = displayValueStr;
+
 
 }
 /*
