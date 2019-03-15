@@ -39,7 +39,8 @@ const btnDivide = document.querySelector("#divide");
 btnDivide.onclick = () => saveValues('/');
 const btnEqual = document.querySelector("#equals");
 btnEqual.onclick = () => saveAndOperate();
-
+const btnDecimal = document.querySelector("#decimal");
+btnDecimal.onclick = () => display('.');
 
 /*function saveOperations(x) {
 	if(displayValueArr.includes('+'||'-'||'/'||'*')) {
@@ -71,28 +72,53 @@ function clearDisplay() {
 function saveAndOperate() {
 	finalNumberStr = numArr.join('');
 	valueArr.push(finalNumberStr);
-
 	operate();
 }
 
 function saveValues(x) {
+		/*numberStr = numArr.join('');
+		valueArr.push(numberStr);
+		*/
 
-		numberStr = numArr.join('');
-		numArr = [];
+
+		/*valueArr.push(x);
+		operate();
+		displayValueArr.push(x);
+		displayValueStr = displayValueArr.join('');
+	}
+	else {
+		container.textContent = displayValueStr;*/
+
+		if(valueArr.includes('*')||valueArr.includes('/')||valueArr.includes('+')||valueArr.includes('-')) {
+			valueArr.push(numberStr);
+			operate();
+			valueArr.push(x);
+			numArr = [];
+			numberStr = '';
+			displayValueArr.push(x);
+			displayValueStr = displayValueArr.join('');
+			container.textContent = displayValueStr;
+		}
+		else {
 		valueArr.push(numberStr);
 		valueArr.push(x);
+		numArr = [];
+		numberStr = '';
 		displayValueArr.push(x);
 		displayValueStr = displayValueArr.join('');
 		container.textContent = displayValueStr;
-	
+	}
 }
 
 
 function display(x) {
 	numArr.push(x);
+	numberStr = numArr.join('');
+
 	displayValueArr.push(x);
 	displayValueStr = displayValueArr.join('');
 	container.textContent = displayValueStr;
+
 }
 
 function multiply (x,y) {
@@ -119,7 +145,7 @@ function operate() {
 	}
 	else if(valueArr.includes('/')) {
 		let division = valueArr.indexOf('/')
-		valueArr.splice(division-1,3,divide(parseInt(valueArr[division-1]),parseInt(valueArr[division+1])));
+		valueArr.splice(division-1,3,divide(parseFloat(valueArr[division-1]),parseFloat(valueArr[division+1])));
 	}
 	else if(valueArr.includes('-')) {
 		let subtraction = valueArr.indexOf('-')
@@ -127,13 +153,12 @@ function operate() {
 	}
 	else if(valueArr.includes('+')) {
 		let addition = valueArr.indexOf('+')
-		valueArr.splice(addition-1,3,add(parseInt(valueArr[addition-1]),parseInt(valueArr[addition+1])));
+		valueArr.splice(addition-1,3,add(parseFloat(valueArr[addition-1]),parseFloat(valueArr[addition+1])));
 	}
-	numArr = [];
-	displayValueStr = valueArr.join('');
-	return container.textContent = displayValueStr;
-}
 
+	container.textContent = valueArr;
+}
+/*
 function finalOperate() {
 
 	while(valueArr.includes('+')) {
@@ -152,11 +177,9 @@ function finalOperate() {
 		let subtraction = valueArr.indexOf('-')
 		valueArr.splice(subtraction-1,3,subtract(parseInt(valueArr[subtraction-1]),parseInt(valueArr[subtraction+1])));
 	}
-	displayValueStr = valueArr.join('');
-	return container.textContent = displayValueStr;
 
 }
-
+*/
 
 
 
