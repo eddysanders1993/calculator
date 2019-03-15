@@ -39,7 +39,8 @@ const btnDivide = document.querySelector("#divide");
 btnDivide.onclick = () => saveValues('/');
 const btnEqual = document.querySelector("#equals");
 btnEqual.onclick = () => saveAndOperate();
-
+const btnDecimal = document.querySelector("#decimal");
+btnDecimal.onclick = () => display('.');
 
 /*function saveOperations(x) {
 	if(displayValueArr.includes('+'||'-'||'/'||'*')) {
@@ -144,7 +145,7 @@ function operate() {
 	}
 	else if(valueArr.includes('/')) {
 		let division = valueArr.indexOf('/')
-		valueArr.splice(division-1,3,divide(parseInt(valueArr[division-1]),parseInt(valueArr[division+1])));
+		valueArr.splice(division-1,3,divide(parseFloat(valueArr[division-1]),parseFloat(valueArr[division+1])));
 	}
 	else if(valueArr.includes('-')) {
 		let subtraction = valueArr.indexOf('-')
@@ -152,10 +153,10 @@ function operate() {
 	}
 	else if(valueArr.includes('+')) {
 		let addition = valueArr.indexOf('+')
-		valueArr.splice(addition-1,3,add(parseInt(valueArr[addition-1]),parseInt(valueArr[addition+1])));
+		valueArr.splice(addition-1,3,add(parseFloat(valueArr[addition-1]),parseFloat(valueArr[addition+1])));
 	}
 
-
+	container.textContent = valueArr;
 }
 /*
 function finalOperate() {
