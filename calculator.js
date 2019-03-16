@@ -12,7 +12,7 @@ let decimalArr = [];
 
 
 const container = document.querySelector('#screen');
-container.style.color = 'white';
+container.style.cssText = 'color: white';
 const btnSeven = document.querySelector("#seven");
 btnSeven.onclick = () => display(7);
 const btnEight = document.querySelector("#eight");
