@@ -12,7 +12,7 @@ let decimalArr = [];
 
 
 const container = document.querySelector('#screen');
-container.style.color = 'blue';
+container.style.color = 'white';
 const btnSeven = document.querySelector("#seven");
 btnSeven.onclick = () => display(7);
 const btnEight = document.querySelector("#eight");
@@ -47,10 +47,10 @@ const btnEqual = document.querySelector("#equals");
 btnEqual.onclick = () => saveAndOperate();
 const btnDecimal = document.querySelector("#decimal");
 btnDecimal.onclick = () => display('.');
-const btnBackSpace = 	document.querySelector("#backspace");
+/*const btnBackSpace = 	document.querySelector("#backspace");
 btnBackSpace.onclick = () => goBack();
 
-/*function goBack() {
+function goBack() {
 	numArr.splice(-1,1);
 	displayValueArr.splice(-1,1);
 	if (displayValueStr.length == 1) {
@@ -72,6 +72,7 @@ function displaySolution() {
 			solution = decimalArr.join('');
 			solutionFloat = parseFloat(solution);
 			solutionFloatRounded = solutionFloat.toFixed(2);
+			decimalArr = [];
 			container.textContent = solutionFloatRounded;
 	}
 	else {
@@ -102,7 +103,10 @@ function clearDisplay() {
 function saveAndOperate() {
 	finalNumberStr = numArr.join('');
 	valueArr.push(finalNumberStr);
+	numArr = [];
+	numberStr = '';
 	operate();
+
 }
 
 function saveValues(x) {
@@ -118,6 +122,15 @@ function saveValues(x) {
 			container.textContent = displayValueStr;
 		}
 		else {
+		if(numberStr=='') {
+			valueArr.push(x);
+			numArr = [];
+			numberStr = '';
+			displayValueArr.push(x);
+			displayValueStr = displayValueArr.join('');
+			container.textContent = displayValueStr;
+		}
+		else {
 		valueArr.push(numberStr);
 		valueArr.push(x);
 		numArr = [];
@@ -125,6 +138,7 @@ function saveValues(x) {
 		displayValueArr.push(x);
 		displayValueStr = displayValueArr.join('');
 		container.textContent = displayValueStr;
+		}
 	}
 }
 
