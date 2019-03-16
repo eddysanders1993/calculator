@@ -47,20 +47,21 @@ const btnEqual = document.querySelector("#equals");
 btnEqual.onclick = () => saveAndOperate();
 const btnDecimal = document.querySelector("#decimal");
 btnDecimal.onclick = () => display('.');
+const btnBackSpace = 	document.querySelector("#backspace");
+btnBackSpace.onclick = () => goBack();
 
-/*function saveOperations(x) {
-	if(displayValueArr.includes('+'||'-'||'/'||'*')) {
-		displayValueArr.push(x);
-		displayValueStr = displayValueArr.join('');
+/*function goBack() {
+	numArr.splice(-1,1);
+	displayValueArr.splice(-1,1);
+	if (displayValueStr.length == 1) {
+		displayValueStr = '';
+		container.textContent = displayValueStr;
 	}
 	else {
-		displayValueArr.push(x);
-		displayValueStr = displayValueArr.join('');
-		firstNumber= firstNumberArray.join('');
-		firstOperator = x;
-	}
-	container.textContent = displayValueStr;
+	container.textContent = displayValueStr.slice(0,displayValueStr.length-1);
+}
 }*/
+
 function displaySolution() {
 	let valString = valueArr.toString();
 	decimalArr = valString.split('');
@@ -86,9 +87,13 @@ function displaySolution() {
 function clearDisplay() {
 	displayValueArr = [];
 	displayValueStr = '';
-	 numberStr = '';
-	 valueArr = [];
-	 numArr = [];
+	numberStr = '';
+	valueArr = [];
+	numArr = [];
+	solution = '';
+	solutionFloat = '';
+	solutionFloatRounded = '';
+	decimalArr = [];
 	container.textContent = '';
 }
 
@@ -101,18 +106,6 @@ function saveAndOperate() {
 }
 
 function saveValues(x) {
-		/*numberStr = numArr.join('');
-		valueArr.push(numberStr);
-		*/
-
-
-		/*valueArr.push(x);
-		operate();
-		displayValueArr.push(x);
-		displayValueStr = displayValueArr.join('');
-	}
-	else {
-		container.textContent = displayValueStr;*/
 
 		if(valueArr.includes('*')||valueArr.includes('/')||valueArr.includes('+')||valueArr.includes('-')) {
 			valueArr.push(numberStr);
@@ -136,15 +129,19 @@ function saveValues(x) {
 }
 
 
+
+
 function display(x) {
-	numArr.push(x);
-	numberStr = numArr.join('');
 
-	displayValueArr.push(x);
-	displayValueStr = displayValueArr.join('');
-	container.textContent = displayValueStr;
-
+		numArr.push(x);
+		numberStr = numArr.join('');
+		displayValueArr.push(x);
+		displayValueStr = displayValueArr.join('');
+		container.textContent = displayValueStr;
 }
+
+
+
 
 function multiply (x,y) {
 	return x * y;
