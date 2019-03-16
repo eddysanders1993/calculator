@@ -3,6 +3,12 @@ let displayValueStr = '';
 let numberStr = '';
 let valueArr = [];
 let numArr = [];
+let solution = '';
+let solutionFloat = '';
+let solutionFloatRounded = '';
+let decimalArr = [];
+
+
 
 
 const container = document.querySelector('#screen');
@@ -55,6 +61,25 @@ btnDecimal.onclick = () => display('.');
 	}
 	container.textContent = displayValueStr;
 }*/
+function displaySolution() {
+	let valString = valueArr.toString();
+	decimalArr = valString.split('');
+	if (decimalArr.includes('I')) {
+		container.textContent = 'Error';
+	}
+	else if (decimalArr.includes('.')) {
+			solution = decimalArr.join('');
+			solutionFloat = parseFloat(solution);
+			solutionFloatRounded = solutionFloat.toFixed(2);
+			container.textContent = solutionFloatRounded;
+	}
+	else {
+		container.textContent = valueArr;
+	}
+}
+
+
+
 
 
 
@@ -141,7 +166,7 @@ function divide (x,y) {
 function operate() {
 	if(valueArr.includes('*')) {
 		let multiplication = valueArr.indexOf('*')
-		valueArr.splice(multiplication-1,3,multiply(parseInt(valueArr[multiplication-1]),parseInt(valueArr[multiplication+1])));
+		valueArr.splice(multiplication-1,3,multiply(parseFloat(valueArr[multiplication-1]),parseFloat(valueArr[multiplication+1])));
 	}
 	else if(valueArr.includes('/')) {
 		let division = valueArr.indexOf('/')
@@ -149,15 +174,14 @@ function operate() {
 	}
 	else if(valueArr.includes('-')) {
 		let subtraction = valueArr.indexOf('-')
-		valueArr.splice(subtraction-1,3,subtract(parseInt(valueArr[subtraction-1]),parseInt(valueArr[subtraction+1])));
+		valueArr.splice(subtraction-1,3,subtract(parseFloat(valueArr[subtraction-1]),parseFloat(valueArr[subtraction+1])));
 	}
 	else if(valueArr.includes('+')) {
 		let addition = valueArr.indexOf('+')
 		valueArr.splice(addition-1,3,add(parseFloat(valueArr[addition-1]),parseFloat(valueArr[addition+1])));
 	}
-
-	container.textContent = valueArr;
-}
+	displaySolution();
+	}
 /*
 function finalOperate() {
 
