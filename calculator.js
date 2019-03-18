@@ -47,36 +47,45 @@ const btnEqual = document.querySelector("#equals");
 btnEqual.onclick = () => saveAndOperate();
 const btnDecimal = document.querySelector("#decimal");
 btnDecimal.onclick = () => display('.');
-/*const btnBackSpace = 	document.querySelector("#backspace");
+const btnBackSpace = 	document.querySelector("#backspace");
 btnBackSpace.onclick = () => goBack();
 
 function goBack() {
+	/*valArr.incluedes(operator) and numberStr !== '' ? splice numberStr :
+	else if valArr includes operator splice valArr and valArr.join = numberStr (this will
+	put valArr into numberStr so future digits can be added on)
+
+	*/
 	numArr.splice(-1,1);
+	numberStr = numberStr.slice(0,numberStr.length-1);
 	displayValueArr.splice(-1,1);
+	valueArr.splice(-1,1);
 	if (displayValueStr.length == 1) {
 		displayValueStr = '';
 		container.textContent = displayValueStr;
 	}
 	else {
-	container.textContent = displayValueStr.slice(0,displayValueStr.length-1);
+	displayValueStr = displayValueStr.slice(0,displayValueStr.length-1);
+	container.textContent = displayValueStr;
 }
-}*/
+}
 container.textContent = 0;
+
 function displaySolution() {
 	let valString = valueArr.toString();
-	decimalArr = valString.split('');
-	if (decimalArr.includes('I')) {
+	/*decimalArr = valString.split('');*/
+	if (valString.includes('I')) {
 		container.textContent = 'Error';
 	}
-	else if (decimalArr.includes('.')) {
-			solution = decimalArr.join('');
-			solutionFloat = parseFloat(solution);
+	else if (valString.includes('.')) {
+			/*solution = decimalArr.join('');*/
+			solutionFloat = parseFloat(valString);
 			solutionFloatRounded = solutionFloat.toFixed(2);
-			decimalArr = [];
+			/*decimalArr = [];*/
 			container.textContent = solutionFloatRounded;
 	}
 	else {
-		container.textContent = valueArr;
+		container.textContent = valString;
 	}
 }
 

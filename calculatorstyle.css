@@ -1,33 +1,44 @@
 body {
   font-family: Arial, Courier, Verdana;
   background-color: black;
-  
+
+
+
 }
 
-main { 
-  
-  display: flex; 
-  flex-direction: column; 
-  align-items: center;
+main {
   background-color: orange;
-  margin-left: 775px;
-  margin-right: 775px;
-  padding-top: 10px;
-  padding-bottom: 20px;
-  border-radius: 5px;
+  width: 250px;
+  margin: 50px auto;
+  border-radius: 10px;
+  border: 5px solid gray;
+  padding: 10px;
+
+
+
 }
 
+div {
+  width: 200px;
+  margin: 0 auto;
 
-#row1 { 
-  padding-left: 84px;
-  
 }
 
 #row5 {
-  
-  padding-left: 42px;
+  margin-top: 20px;
+
 }
 
-button.operator {
-  color: orange;
+button {
+  height: 50px;
+  width: 50px;
+}
+
+#screen {
+  background-color: black;
+  height: 45px;
+  margin: 20px;
+  font-size: 30px;
+  border: 2px solid gray;
+  border-radius: 5px;
 }
