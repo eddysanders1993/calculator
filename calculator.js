@@ -7,8 +7,9 @@ let solution = '';
 let solutionFloat = '';
 let solutionFloatRounded = '';
 let decimalArr = [];
-
-
+let valString = '';
+let lastOperator = [];
+let lastNumber = '';
 
 
 const container = document.querySelector('#screen');
@@ -55,7 +56,6 @@ function goBack() {
 	else if valArr includes operator splice valArr and valArr.join = numberStr (this will
 	put valArr into numberStr so future digits can be added on)
 
-	*/
 	numArr.splice(-1,1);
 	numberStr = numberStr.slice(0,numberStr.length-1);
 	displayValueArr.splice(-1,1);
@@ -66,13 +66,24 @@ function goBack() {
 	}
 	else {
 	displayValueStr = displayValueStr.slice(0,displayValueStr.length-1);
-	container.textContent = displayValueStr;
-}
+	*/
+	if(displayValueStr[displayValueStr.length-1] == '+' ||displayValueStr[displayValueStr.length-1] == '-' ||displayValueStr[displayValueStr.length-1] == '*' ||displayValueStr[displayValueStr.length-1] == '/') {
+		displayValueArr.splice(-1,1);
+		valueArr.splice(-1,1);
+		lastOperator = displayValueArr.lastIndexOf('+');
+		lastNumber =  displayValueStr.slice(lastOperator);
+		numberStr = lastNumber;
+		numArr = lastNumber.split('');
+
+		displayValueStr = displayValueStr.slice(0,displayValueStr.length-1);
+		container.textContent = displayValueStr;
+	}
+
 }
 container.textContent = 0;
 
 function displaySolution() {
-	let valString = valueArr.toString();
+	valString = valueArr.toString();
 	/*decimalArr = valString.split('');*/
 	if (valString.includes('I')) {
 		container.textContent = 'Error';
