@@ -8,12 +8,10 @@ let solutionFloat = '';
 let solutionFloatRounded = '';
 let decimalArr = [];
 let valString = '';
-<<<<<<< HEAD
 
-=======
 let lastOperator = [];
 let lastNumber = '';
->>>>>>> eee4414f8e7d48ca0f4625f85772ff7edf369e77
+
 
 
 const container = document.querySelector('#screen');
@@ -52,11 +50,11 @@ const btnEqual = document.querySelector("#equals");
 btnEqual.onclick = () => saveAndOperate();
 const btnDecimal = document.querySelector("#decimal");
 btnDecimal.onclick = () => display('.');
-const btnBackSpace = 	document.querySelector("#backspace");
+/*const btnBackSpace = 	document.querySelector("#backspace");
 btnBackSpace.onclick = () => goBack();
 
 function goBack() {
-	/*valArr.incluedes(operator) and numberStr !== '' ? splice numberStr :
+valArr.incluedes(operator) and numberStr !== '' ? splice numberStr :
 	else if valArr includes operator splice valArr and valArr.join = numberStr (this will
 	put valArr into numberStr so future digits can be added on)
 
@@ -70,20 +68,21 @@ function goBack() {
 	}
 	else {
 	displayValueStr = displayValueStr.slice(0,displayValueStr.length-1);
-	*/
 	if(displayValueStr[displayValueStr.length-1] == '+' ||displayValueStr[displayValueStr.length-1] == '-' ||displayValueStr[displayValueStr.length-1] == '*' ||displayValueStr[displayValueStr.length-1] == '/') {
 		displayValueArr.splice(-1,1);
 		valueArr.splice(-1,1);
+
 		lastOperator = displayValueArr.lastIndexOf('+');
-		lastNumber =  displayValueStr.slice(lastOperator);
-		numberStr = lastNumber;
-		numArr = lastNumber.split('');
+		lastNumber =  displayValueStr.slice(lastOperator+1);
+		numberStr = lastNumber.slice(0,lastNumber.length-1);
+		numArr = numberStr.split('');
 
 		displayValueStr = displayValueStr.slice(0,displayValueStr.length-1);
 		container.textContent = displayValueStr;
 	}
 
 }
+*/
 container.textContent = 0;
 
 function displaySolution() {
@@ -171,13 +170,20 @@ function saveValues(x) {
 
 function display(x) {
 
+	if (displayValueStr.length<13) {
 		numArr.push(x);
 		numberStr = numArr.join('');
 		displayValueArr.push(x);
 		displayValueStr = displayValueArr.join('');
 		container.textContent = displayValueStr;
-}
+	}
+	else if(displayValueStr.length==13) {
+		displayValueStr = "TOO LONG";
+		container.textContent = displayValueStr;
 
+
+	}
+}
 
 
 
