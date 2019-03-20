@@ -7,7 +7,7 @@ let solution = '';
 let solutionFloat = '';
 let solutionFloatRounded = '';
 let decimalArr = [];
-
+let valString = '';
 
 
 
@@ -72,7 +72,7 @@ function goBack() {
 container.textContent = 0;
 
 function displaySolution() {
-	let valString = valueArr.toString();
+	valString = valueArr.toString();
 	/*decimalArr = valString.split('');*/
 	if (valString.includes('I')) {
 		container.textContent = 'Error';
